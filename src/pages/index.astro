@@ -1,0 +1,41 @@
+---
+import Layout from "../layouts/Layout.astro"
+import ButtonsContainer from "../components/ButtonsContainer"
+import { type Bases } from "../types/conversorTypes"
+
+const BASES: Bases = {
+	2: "Binario",
+	8: "Octal",
+	10: "Decimal",
+	16: "Hexadecimal",
+}
+---
+
+<Layout title="Welcome to Astro.">
+	<h1>Conversor de bases</h1>
+	<main>
+		<ButtonsContainer client:visible bases={BASES} />
+	</main>
+</Layout>
+
+<style is:global>
+	:root {
+		color-scheme: light dark;
+	}
+</style>
+
+<style>
+	h1 {
+		text-align: center;
+		margin-top: 4rem;
+	}
+
+	main {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		gap: 2rem
+	}
+</style>

@@ -1,0 +1,54 @@
+.conversorInput {
+  padding: 0.3rem;
+  font-size: 1rem;
+  border: 1px solid #333;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.conversorInput.binaryInput {
+  border: 1px solid rgba(94, 184, 82, 0.288)
+} 
+
+.conversorInput:focus {
+  outline: none;
+  border: 1px solid #333;
+}
+
+.conversorInput.binaryInput:focus {
+  border: 1px solid rgba(94, 184, 82, 0.288)
+} 
+
+.conversorInput::-webkit-inner-spin-button,
+.conversorInput::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.conversorInput[type=number] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.inputsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+
+.buttonOptionsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+}
+
+@media (max-width: 768px) {
+  .inputsContainer {
+    gap: 1rem;
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "baseconverter",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.7.0",
+    "@astrojs/preact": "^3.4.0",
+    "astro": "^4.10.0",
+    "preact": "^10.22.0",
+    "typescript": "^5.4.5"
+  }
+}

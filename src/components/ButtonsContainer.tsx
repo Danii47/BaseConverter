@@ -8,10 +8,10 @@ import "./Components.css"
 export default function ButtonsContainer({ bases: BASES }: { bases: Bases }) {
 
   const [baseValues, setBaseValues] = useState({
-    2: 0,
-    8: 0,
-    10: 0,
-    16: 0,
+    2: "0",
+    8: "0",
+    10: "0",
+    16: "0",
   })
 
   const [options, setOptions] = useState({

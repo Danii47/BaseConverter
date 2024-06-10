@@ -3,7 +3,7 @@ export type Bases = {
 }
 
 export type BasesValues = {
-  [base: string]: number
+  [base: string]: string
 }
 
 export type OptionsType = {

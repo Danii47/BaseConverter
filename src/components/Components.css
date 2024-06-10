@@ -1,23 +1,26 @@
 .conversorInput {
+  width: 100%;
+  max-width: 200px;
   padding: 0.3rem;
   font-size: 1rem;
   border: 1px solid #333;
   border-radius: 5px;
   text-align: center;
+  box-sizing: border-box;
 }
 
-.conversorInput.binaryInput {
-  border: 1px solid rgba(94, 184, 82, 0.288)
-} 
 
 .conversorInput:focus {
   outline: none;
-  border: 1px solid #333;
+  border: 2px solid #525252;
+  padding: calc(0.3rem - 1px);
 }
 
-.conversorInput.binaryInput:focus {
-  border: 1px solid rgba(94, 184, 82, 0.288)
-} 
+.conversorInput.error {
+  border: 1px solid rgb(200 0 0 / 40%);
+  background-color: rgb(200 0 0 / 15%);
+  padding: 0.3rem;
+}
 
 .conversorInput::-webkit-inner-spin-button,
 .conversorInput::-webkit-outer-spin-button {

@@ -3,6 +3,7 @@ import type { Base, BasesValues, OptionsType } from "../types/conversorTypes"
 import { useEffect } from "preact/hooks"
 import "./Components.css"
 import { getNewBaseValue } from "../utils/getNewBaseValues"
+import { comprobateValidNumber } from "../utils/comprobateIsValidNumber"
 
 export default function ChangeBaseInput(
   { base, baseValues, setBaseValues, options, setOptions }:
@@ -13,7 +14,7 @@ export default function ChangeBaseInput(
   useEffect(() => {
     setBaseValues((baseValues: BasesValues) => {
 
-      const baseValuesEntries = Object.entries(baseValues) as Array<[Base, number]>
+      const baseValuesEntries = Object.entries(baseValues) as Array<[Base, string]>
 
       const newVaseValue = getNewBaseValue(baseValuesEntries, base as Base, baseValues[base].toString(), options)
 
@@ -25,6 +26,16 @@ export default function ChangeBaseInput(
 
   const handleChangeInput = (event: JSX.TargetedEvent<HTMLInputElement>) => {
     const { id: changingBase, value: newValue } = event.target as HTMLInputElement
+    
+    if (!comprobateValidNumber(newValue, changingBase)) {
+      setBaseValues((baseValues: BasesValues) => {
+        return {
+          ...baseValues,
+          [changingBase]: newValue
+        }
+      })
+      return
+    }
 
     const newBits = changingBase !== "2" ? parseInt(newValue, Number(changingBase)).toString(2) : newValue
 
@@ -46,8 +57,7 @@ export default function ChangeBaseInput(
 
     setBaseValues((baseValues: BasesValues) => {
 
-
-      const baseValuesEntries = Object.entries(baseValues) as Array<[Base, number]>
+      const baseValuesEntries = Object.entries(baseValues) as Array<[Base, string]>
       const newVaseValue = getNewBaseValue(baseValuesEntries, changingBase as Base, newValue, options)
 
       return Object.fromEntries(newVaseValue)
@@ -56,11 +66,11 @@ export default function ChangeBaseInput(
   }
   return (
     <input
-      type={base !== "16" ? "number" : "text"}
+      type="text"
       id={base}
       value={baseValues[base]}
       onInput={handleChangeInput}
-      class={`conversorInput ${base === "2" ? "binaryInput" : ""}`}
+      class={`conversorInput ${!comprobateValidNumber(baseValues[base], base) ? "error" : ""}`}
     />
   )
 }

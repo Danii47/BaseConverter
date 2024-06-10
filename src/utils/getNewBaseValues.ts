@@ -2,7 +2,7 @@ import type { Base, OptionsType } from "../types/conversorTypes"
 import { twoComplementValue } from "./twoComplement"
 
 export function getNewBaseValue(
-  baseValuesEntries: Array<[Base, number]>,
+  baseValuesEntries: Array<[Base, string]>,
   changingBase: Base,
   newValue: string,
   options: OptionsType

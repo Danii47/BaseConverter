@@ -50,6 +50,28 @@
 
 }
 
+
+
+.resultContainer {
+  width: 100%;
+  min-width: 200px;
+  padding: 0.3rem;
+  font-size: 1rem;
+  border: 1px solid #333;
+  border-radius: 5px;
+  text-align: center;
+  box-sizing: border-box;
+
+}
+.resultsContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+
 @media (max-width: 768px) {
   .inputsContainer {
     gap: 1rem;

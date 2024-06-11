@@ -6,61 +6,67 @@ import { getNewBaseValue } from "../utils/getNewBaseValues"
 import { comprobateValidNumber } from "../utils/comprobateIsValidNumber"
 
 export default function ChangeBaseInput(
-  { base, baseValues, setBaseValues, options, setOptions }:
-    { base: Base, baseValues: BasesValues, setBaseValues: Function, options: OptionsType, setOptions: Function }
+  { base, baseValues, setBaseValues, options }:
+    { base: Base, baseValues: BasesValues, setBaseValues: Function, options: OptionsType }
 ) {
 
 
   useEffect(() => {
     setBaseValues((baseValues: BasesValues) => {
 
-      const baseValuesEntries = Object.entries(baseValues) as Array<[Base, string]>
+      const baseValuesEntries = Object.entries(baseValues.values) as Array<[Base, string]>
+      const newBaseValue = getNewBaseValue(baseValuesEntries, base as Base, baseValues.values[base].toString(), options)
 
-      const newVaseValue = getNewBaseValue(baseValuesEntries, base as Base, baseValues[base].toString(), options)
+      const objectFromEntries = Object.fromEntries(newBaseValue)
+      let newBits = objectFromEntries["2"].length
 
-      return Object.fromEntries(newVaseValue)
+      return {
+        bits: newBits || baseValues.bits,
+        values: objectFromEntries
+      }
 
     })
-  }, [options.signOptions])
+  }, [options])
 
 
   const handleChangeInput = (event: JSX.TargetedEvent<HTMLInputElement>) => {
     const { id: changingBase, value: newValue } = event.target as HTMLInputElement
-    
+
     if (!comprobateValidNumber(newValue, changingBase)) {
       setBaseValues((baseValues: BasesValues) => {
         return {
           ...baseValues,
-          [changingBase]: newValue
+          values: {
+            ...baseValues.values,
+            [changingBase]: newValue
+
+          }
         }
       })
       return
     }
 
-    const newBits = changingBase !== "2" ? parseInt(newValue, Number(changingBase)).toString(2) : newValue
-
-    setOptions((options: OptionsType) => {
-      if (!options.signOptions.magnitudSign && !options.signOptions.ca2) {
-        return {
-          ...options,
-          bits: newBits[0] === "-" ? newBits.length - 1 : newBits.length
-        }
-
-      } else {
-
-        return {
-          ...options,
-          bits: newBits[0] === "-" || changingBase !== "10" ? newBits.length : newBits.length + 1
-        }
-      }
-    })
-
+    
     setBaseValues((baseValues: BasesValues) => {
+      
+      const baseValuesEntries = Object.entries(baseValues.values) as Array<[Base, string]>
+      const newBaseValue = getNewBaseValue(baseValuesEntries, changingBase as Base, newValue, options)
 
-      const baseValuesEntries = Object.entries(baseValues) as Array<[Base, string]>
-      const newVaseValue = getNewBaseValue(baseValuesEntries, changingBase as Base, newValue, options)
+      const newBinaryNumber = changingBase !== "2" ? parseInt(newValue, Number(changingBase)).toString(2) : newValue
+      
+      let newBits
 
-      return Object.fromEntries(newVaseValue)
+      if (!options.magnitudSign && !options.ca2) {
+        newBits = newBinaryNumber[0] === "-" ? newBinaryNumber.length - 1 : newBinaryNumber.length
+      } else {
+        newBits = newBinaryNumber[0] === "-" || changingBase !== "10" ? newBinaryNumber.length : newBinaryNumber.length + 1
+      }
+
+
+      return {
+        bits: newBits,
+        values: Object.fromEntries(newBaseValue)
+      }
 
     })
   }
@@ -68,9 +74,9 @@ export default function ChangeBaseInput(
     <input
       type="text"
       id={base}
-      value={baseValues[base]}
+      value={baseValues.values[base]}
       onInput={handleChangeInput}
-      class={`conversorInput ${!comprobateValidNumber(baseValues[base], base) ? "error" : ""}`}
+      class={`conversorInput ${!comprobateValidNumber(baseValues.values[base], base) ? "error" : ""}`}
     />
   )
 }

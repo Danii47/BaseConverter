@@ -3,15 +3,13 @@ export type Bases = {
 }
 
 export type BasesValues = {
-  [base: string]: string
+  bits: number
+  values: {
+    [base: string]: string
+  } 
 }
 
 export type OptionsType = {
-  bits: number | null
-  signOptions: SignOptionsType
-}
-
-export type SignOptionsType = {
   ca2: boolean
   magnitudSign: boolean
 }

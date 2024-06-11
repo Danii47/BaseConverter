@@ -7,37 +7,12 @@ export default function ButtonsOptions({ setOptions, options }: { setOptions: Fu
 
   const handleChangeOption = (event: JSX.TargetedEvent<HTMLInputElement>) => {
     const { id, checked } = event.target as HTMLInputElement
-  
+
     if (!checked) return
 
-    console.log({options})
-
-    setOptions(() => {
-      if (id == "ca2") {
-        return {
-          ...options,
-          signOptions: {
-            ca2: true,
-            magnitudSign: false,
-          }
-        }
-      } else if (id == "magnitudSign") {
-        return {
-          ...options,
-          signOptions: {
-            ca2: false,
-            magnitudSign: true,
-          }
-        }
-      } else {
-        return {
-          ...options,
-          signOptions: {
-            ca2: false,
-            magnitudSign: false,
-          }
-        }
-      }
+    setOptions({
+      ca2: id === "ca2",
+      magnitudSign: id === "magnitudSign"
     })
   }
 
@@ -66,7 +41,7 @@ export default function ButtonsOptions({ setOptions, options }: { setOptions: Fu
           style={styles.input}
           name="options"
           onInput={handleChangeOption}
-          checked={!options.signOptions.ca2 && !options.signOptions.magnitudSign}
+          checked={!options.ca2 && !options.magnitudSign}
         />
         Bits sin signo
       </label>

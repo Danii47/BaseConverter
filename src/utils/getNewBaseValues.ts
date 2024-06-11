@@ -17,7 +17,7 @@ export function getNewBaseValue(
 
       const newBaseValue = parseInt(newValue, Number(changingBase)).toString(Number(base))
 
-      if (options.signOptions.magnitudSign) {
+      if (options.magnitudSign) {
 
         if (base === "2" && changingBase === "10") {
 
@@ -42,7 +42,7 @@ export function getNewBaseValue(
 
         }
 
-      } else if (options.signOptions.ca2) {
+      } else if (options.ca2) {
 
         if (base === "2" && changingBase === "10") {
 

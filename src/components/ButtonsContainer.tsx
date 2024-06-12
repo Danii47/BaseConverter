@@ -1,11 +1,11 @@
-import { useState } from "preact/hooks"
-import ChangeBaseInput from "./ChangeBaseInput"
+import { useState, type Dispatch, type StateUpdater } from "preact/hooks"
 import ButtonsOptions from "./ButtonsOptions"
-import type { Bases, Base } from "../types/conversorTypes"
+import type { Bases, Operation } from "../types/conversorTypes"
 
 import "./Components.css"
 import NumberInput from "./NumberInput"
 import OperationResults from "./OperationResults"
+import OperationButtons from "./OperationButtons"
 
 export default function ButtonsContainer({ bases: BASES }: { bases: Bases }) {
 
@@ -34,6 +34,8 @@ export default function ButtonsContainer({ bases: BASES }: { bases: Bases }) {
     magnitudSign: false,
   })
 
+  const [operation, setOperation] = useState("+") as [Operation, Dispatch<StateUpdater<Operation>> ];
+
   return (
     <>
       <ButtonsOptions
@@ -48,6 +50,11 @@ export default function ButtonsContainer({ bases: BASES }: { bases: Bases }) {
         options={options}
       />
 
+      <OperationButtons
+        setOperation={setOperation}
+        operation={operation}
+      />
+
       <NumberInput
         bases={BASES}
         baseValues={secondNumberBaseValues}
@@ -59,6 +66,7 @@ export default function ButtonsContainer({ bases: BASES }: { bases: Bases }) {
         firstNumberBaseValues={firstNumberBaseValues}
         secondNumberBaseValues={secondNumberBaseValues}
         options={options}
+        operation={operation}
       />
     </>
   )

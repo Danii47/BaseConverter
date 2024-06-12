@@ -1,5 +1,7 @@
+export type Base = "2" | "8" | "10" | "16"
+
 export type Bases = {
-  [base: string]: string
+  [base in Base]: string
 }
 
 export type BasesValues = {
@@ -14,4 +16,12 @@ export type OptionsType = {
   magnitudSign: boolean
 }
 
-export type Base = "2" | "8" | "10" | "16"
+
+export type Operations = {
+  sum: "+"
+  sub: "-"
+  mult: "×"
+  div: "÷"
+}
+
+export type Operation = "+" | "-" | "×" | "÷"

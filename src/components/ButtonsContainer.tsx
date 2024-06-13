@@ -7,7 +7,7 @@ import NumberInput from "./NumberInput"
 import OperationResults from "./OperationResults"
 import OperationButtons from "./OperationButtons"
 
-export default function ButtonsContainer({ bases: BASES }: { bases: Bases }) {
+export default function ButtonsContainer() {
 
   const [firstNumberBaseValues, setFirstNumberBaseValues] = useState({
     bits: 0,
@@ -44,7 +44,6 @@ export default function ButtonsContainer({ bases: BASES }: { bases: Bases }) {
       />
 
       <NumberInput
-        bases={BASES}
         baseValues={firstNumberBaseValues}
         setBaseValues={setFirstNumberBaseValues}
         options={options}
@@ -56,7 +55,6 @@ export default function ButtonsContainer({ bases: BASES }: { bases: Bases }) {
       />
 
       <NumberInput
-        bases={BASES}
         baseValues={secondNumberBaseValues}
         setBaseValues={setSecondNumberBaseValues}
         options={options}

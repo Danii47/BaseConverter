@@ -18,16 +18,16 @@ export default function OperationButtons(
 
   return (
     <div class="operationButtons">
-      <button id="+" onClick={handleChangeOperation} class={`operationButton ${(operation === "+" ? "selected" : "")}`}>
+      <button id="+" onClick={handleChangeOperation} title="Sumar" class={`operationButton ${(operation === "+" ? "selected" : "")}`}>
         +
       </button>
-      <button id="-" onClick={handleChangeOperation} class={`operationButton ${(operation === "-" ? "selected" : "")}`}>
+      <button id="-" onClick={handleChangeOperation} title="Restar" class={`operationButton ${(operation === "-" ? "selected" : "")}`}>
         -
       </button>
-      <button id="×" onClick={handleChangeOperation} class={`operationButton ${(operation === "×" ? "selected" : "")}`}>
+      <button id="×" onClick={handleChangeOperation} title="Multiplicar" class={`operationButton ${(operation === "×" ? "selected" : "")}`}>
         ×
       </button>
-      <button id="÷" onClick={handleChangeOperation} class={`operationButton ${(operation === "÷" ? "selected" : "")}`}>
+      <button id="÷" onClick={handleChangeOperation} title="Dividir" class={`operationButton ${(operation === "÷" ? "selected" : "")}`}>
         ÷
       </button>
     </div>

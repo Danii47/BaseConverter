@@ -50,10 +50,11 @@ export default function OperationResults(
     }
 
 
-    localStorage.setItem('data', JSON.stringify({
+    localStorage.setItem("operationsData", JSON.stringify({
       firstNumberBaseValues,
       secondNumberBaseValues,
       options,
+      maxBits: Math.max(firstNumberBaseValues.bits, secondNumberBaseValues.bits)
     }))
 
     setResult({
@@ -82,6 +83,8 @@ export default function OperationResults(
 
             const showSteps = (base === "2") && (operation === "×" || operation === "÷") && result.values[base as Base] !== "0"
 
+            const valueIsZero = result.values[base as Base] !== "0"
+
             return (
               <section>
                 {
@@ -97,7 +100,7 @@ export default function OperationResults(
                     </h2>
                   )
                 }
-                <div onClick={handleClickResult} title="Copiar resultado" class={`resultContainer ${result.values[base as Base] !== "0" ? "showingResult" : ""}`}>
+                <div onClick={valueIsZero ? handleClickResult : undefined} title={valueIsZero ? "Copiar resultado" : ""} class={`resultContainer ${valueIsZero ? "showingResult" : ""}`}>
                   {result.values[base as Base]}
                 </div>
               </section>

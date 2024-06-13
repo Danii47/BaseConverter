@@ -201,3 +201,16 @@
   background-color: light-dark(#dfdfdf, #101014);
   scale: 1.1;
 }
+
+.operationsTable {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+  border: 1px solid #333;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: light-dark(#ffffff, #181a22);
+  text-align: center;
+
+}

@@ -1,16 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro"
-
+import MultiplicationTable from "../components/MultiplicationTable"
 ---
 
-<Layout title="Pasos multiplicación">
-  <h1>Multiplicación realizando operación de desplazamiento</h1>
-  
+<Layout
+  title="Pasos multiplicación"
+  pageTitle="Multiplicación realizando operación de desplazamiento"
+>
+  <MultiplicationTable client:visible />
 </Layout>
-
-<style>
-	h1 {
-		text-align: center;
-		margin-top: 4rem;
-	}
-</style>

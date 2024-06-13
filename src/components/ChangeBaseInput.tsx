@@ -62,10 +62,11 @@ export default function ChangeBaseInput(
         newBits = newBinaryNumber[0] === "-" || changingBase !== "10" ? newBinaryNumber.length : newBinaryNumber.length + 1
       }
 
+      const objectFromEntries = Object.fromEntries(newBaseValue)
 
       return {
         bits: newBits,
-        values: Object.fromEntries(newBaseValue)
+        values: objectFromEntries
       }
 
     })

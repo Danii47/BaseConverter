@@ -9,6 +9,8 @@ export default function OperationButtons(
 ) {
 
   const handleChangeOperation = (event: JSX.TargetedEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+    
     const { id } = event.target as HTMLButtonElement
 
     if (operation === id) return

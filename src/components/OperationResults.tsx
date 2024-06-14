@@ -100,7 +100,7 @@ export default function OperationResults(
                     </h2>
                   )
                 }
-                <div onClick={!valueIsZero ? handleClickResult : undefined} title={!valueIsZero ? "Copiar resultado" : ""} class={`resultContainer ${valueIsZero ? "showingResult" : ""}`}>
+                <div onClick={!valueIsZero ? handleClickResult : undefined} title={!valueIsZero ? "Copiar resultado" : ""} class={`resultContainer ${!valueIsZero ? "showingResult" : ""}`}>
                   {result.values[base as Base]}
                 </div>
               </section>

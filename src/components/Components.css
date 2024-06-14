@@ -177,7 +177,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: .6rem;
+  gap: .8rem;
   margin-top: .5rem;
 }
 
@@ -189,7 +189,7 @@
 
   padding: 0.5rem 1rem;
   font-size: 1rem;
-  border: 1px solid #333;
+  border: 1px solid #444;
   border-radius: 5px;
 
   color: #fff;
@@ -214,6 +214,7 @@
 
 .operationButton.selected {
   background-color: light-dark(#dfdfdf, #101014);
+  box-shadow: 0 0 7px 1px rgba(255, 255, 255, 0.2);
   scale: 1.1;
 }
 

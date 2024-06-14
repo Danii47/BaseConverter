@@ -1,6 +1,6 @@
 ---
-import Layout from "../layouts/Layout.astro"
-import MultiplicationTable from "../components/MultiplicationTable"
+import Layout from "../layouts/Layout.astro";
+import MultiplicationTable from "../components/MultiplicationTable";
 ---
 
 <Layout
@@ -8,4 +8,30 @@ import MultiplicationTable from "../components/MultiplicationTable"
   pageTitle="Multiplicación realizando operación de desplazamiento"
 >
   <MultiplicationTable client:visible />
+  <div>
+    <a href="/">Volver al inicio</a>
+  </div>
 </Layout>
+
+<style>
+  a {
+    margin-top: 1rem;
+    display: inline-block;
+    padding: 10px 18px;
+    color: #fff;
+    background-color: #282c36;
+    border: 1px solid #080808;
+    box-shadow: 0 5px 10px 6px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    text-decoration: none;
+    transition:
+      background-color 0.3s,
+      color 0.3s;
+    user-select: none;
+  }
+
+  div {
+    display: flex;
+    justify-content: center;
+  }
+</style>

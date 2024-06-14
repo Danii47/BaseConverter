@@ -53,7 +53,7 @@ export default function MultiplicationTable() {
       let P0 = Plo.slice(-1)
 
       if (P0 === "1") {
-        Phi = (parseInt(Phi, 2) + parseInt(operationsData.firstNumberBaseValues.values["2"], 2)).toString(2)
+        Phi = (parseInt(Phi, 2) + parseInt(operationsData.firstNumberBaseValues.values["2"], 2)).toString(2).padStart(operationsData.maxBits, "0")
         table.push(
 
           <tr>
@@ -66,8 +66,8 @@ export default function MultiplicationTable() {
         )
       }
 
-      Plo = Phi.slice(-1) + Plo.substring(0, Plo.length - 1)
-      Phi = "0" + Phi.substring(0, Phi.length - 1)
+      Plo = (Phi.slice(-1) + Plo.substring(0, Plo.length - 1)).padStart(operationsData.maxBits, "0")
+      Phi = ("0" + Phi.substring(0, Phi.length - 1)).padStart(operationsData.maxBits, "0")
 
       table.push(
         <tr class={i === operationsData.maxBits - 1 ? "tableResult" : ""}>

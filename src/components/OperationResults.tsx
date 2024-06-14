@@ -83,7 +83,7 @@ export default function OperationResults(
 
             const showSteps = (base === "2") && (operation === "×" || operation === "÷") && result.values[base as Base] !== "0"
 
-            const valueIsZero = result.values[base as Base] !== "0"
+            const valueIsZero = result.values[base as Base] === "0"
 
             return (
               <section>
@@ -100,7 +100,7 @@ export default function OperationResults(
                     </h2>
                   )
                 }
-                <div onClick={valueIsZero ? handleClickResult : undefined} title={valueIsZero ? "Copiar resultado" : ""} class={`resultContainer ${valueIsZero ? "showingResult" : ""}`}>
+                <div onClick={!valueIsZero ? handleClickResult : undefined} title={!valueIsZero ? "Copiar resultado" : ""} class={`resultContainer ${valueIsZero ? "showingResult" : ""}`}>
                   {result.values[base as Base]}
                 </div>
               </section>

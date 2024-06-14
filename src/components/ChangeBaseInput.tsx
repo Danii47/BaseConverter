@@ -18,7 +18,9 @@ export default function ChangeBaseInput(
       const newBaseValue = getNewBaseValue(baseValuesEntries, base as Base, baseValues.values[base].toString(), options)
 
       const objectFromEntries = Object.fromEntries(newBaseValue)
-      let newBits = objectFromEntries["2"].length
+      objectFromEntries["10"] = objectFromEntries["10"] === "NaN" ? "" : objectFromEntries["10"]
+
+      const newBits = objectFromEntries["2"] !== "0NaN" ? objectFromEntries["2"].length : 0
 
       return {
         bits: newBits || baseValues.bits,
@@ -63,7 +65,8 @@ export default function ChangeBaseInput(
       }
 
       const objectFromEntries = Object.fromEntries(newBaseValue)
-
+      objectFromEntries["10"] = objectFromEntries["10"] === "NaN" ? "" : objectFromEntries["10"]
+  
       return {
         bits: newBits,
         values: objectFromEntries

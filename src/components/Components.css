@@ -95,6 +95,12 @@
   box-shadow: 0 0 15px rgba(10, 180, 10, 0.151);
 }
 
+.resultContainer.showingResult:active {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  box-shadow: none;
+}
+
 .resultContainer.showingResult:after {
   content: "";
   display: block;
@@ -105,7 +111,7 @@
   width: 100%;
   height: 100%;
   opacity: 0;
-  transition: all 0.5s;
+  transition: all 0.4s;
   box-shadow: 0 0 8px 16px rgba(10, 179, 10, 0.151);
 }
 
@@ -160,6 +166,12 @@
   color: inherit;
 }
 
+.noLinkStyle:active {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  box-shadow: none;
+}
+
 .operationButtons {
   display: flex;
   flex-wrap: wrap;
@@ -195,6 +207,9 @@
 
 .operationButton:active {
   background-color: light-dark(#dfdfdf, #101014);
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  box-shadow: none;
 }
 
 .operationButton.selected {

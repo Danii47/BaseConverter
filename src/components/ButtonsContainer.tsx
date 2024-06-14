@@ -12,20 +12,20 @@ export default function ButtonsContainer() {
   const [firstNumberBaseValues, setFirstNumberBaseValues] = useState({
     bits: 0,
     values: {
-      2: "0",
-      8: "0",
-      10: "0",
-      16: "0",
+      2: "",
+      8: "",
+      10: "",
+      16: "",
     }
   })
 
   const [secondNumberBaseValues, setSecondNumberBaseValues] = useState({
     bits: 0,
     values: {
-      2: "0",
-      8: "0",
-      10: "0",
-      16: "0",
+      2: "",
+      8: "",
+      10: "",
+      16: "",
     }
   })
 

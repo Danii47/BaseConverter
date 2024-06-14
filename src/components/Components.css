@@ -206,11 +206,43 @@
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-  padding: 1rem;
+  border-radius: 8px;
   border: 1px solid #333;
-  border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   background-color: light-dark(#ffffff, #181a22);
   text-align: center;
+  padding: .25rem;
+  overflow: hidden;
+  border-spacing: 0;
+}
 
+.operationsTable th {
+  padding: .5rem;
+  border-bottom: 1px solid #333;
+  border-right: 1px solid #333;
+}
+
+.operationsTable td {
+  padding: .5rem;
+  border-bottom: 1px solid #333;
+  border-right: 1px solid #333;
+
+}
+
+.operationsTable tr:last-child td {
+  border-bottom: none;
+}
+
+.operationsTable td:last-child, .operationsTable th:last-child {
+  border-right: none;
+}
+
+.operationsTable .tableResult {
+  border: 2px solid black;
+}
+
+.operationToShow {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
 }

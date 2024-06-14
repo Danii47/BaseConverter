@@ -24,7 +24,7 @@ type OperationsData = {
 
 export default function MultiplicationTable() {
 
-  
+
   const [operationsData, setOperationsData] = useState() as [OperationsData, Dispatch<StateUpdater<OperationsData>>]
 
   useEffect(() => {
@@ -36,27 +36,52 @@ export default function MultiplicationTable() {
   }, [])
 
   const generateMultiplicationTable = () => {
-  
-    let Phi = "".padStart(operationsData.maxBits, "0")
-    let Plo = operationsData.secondNumberBaseValues.values["2"].padStart(operationsData.maxBits, "0")
+
+    let Phi: string = "".padStart(operationsData.maxBits, "0")
+    let Plo: string = operationsData.secondNumberBaseValues.values["2"].padStart(operationsData.maxBits, "0")
+
+    const table = [
+      <tr>
+        <td>Inicial</td>
+        <td>{"".padStart(operationsData.maxBits, "0")}</td>
+        <td>{operationsData.secondNumberBaseValues.values["2"].padStart(operationsData.maxBits, "0")}</td>
+        <td>P<sub>LO</sub> ← Multiplicador</td>
+      </tr>
+    ]
 
     for (let i = 0; i < operationsData.maxBits; i++) {
       let P0 = Plo.slice(-1)
 
       if (P0 === "1") {
         Phi = (parseInt(Phi, 2) + parseInt(operationsData.firstNumberBaseValues.values["2"], 2)).toString(2)
+        table.push(
+
+          <tr>
+            <td>{i + 1}</td>
+            <td>{Phi}</td>
+            <td>{Plo}</td>
+            <td>P<sub>HI</sub> = P<sub>HI</sub> + Multiplicador</td>
+          </tr>
+
+        )
       }
 
-      Phi = Plo[0] === "1" ? Phi.substring(1) + "1" : Phi.substring(1) + "0"
-      Plo = Plo.substring(1) + "0"
+      Plo = Phi.slice(-1) + Plo.substring(0, Plo.length - 1)
+      Phi = "0" + Phi.substring(0, Phi.length - 1)
 
-      
+      table.push(
+        <tr class={i === operationsData.maxBits - 1 ? "tableResult" : ""}>
+          <td>{i + 1}</td>
+          <td>{Phi}</td>
+          <td>{Plo}</td>
+          <td>P &gt;&gt; 1</td>
+        </tr>
+      )
+
     }
 
 
-    return (<div>
-      test
-    </div>)
+    return table
   }
 
   return (
@@ -65,7 +90,10 @@ export default function MultiplicationTable() {
         !operationsData ?
           <div>No hay datos de operaciones</div> :
           <div class="operations">
-            Numero: {operationsData.firstNumberBaseValues.values["2"]} x {operationsData.secondNumberBaseValues.values["2"]}
+
+            <div class="operationToShow">
+              <p>{operationsData.firstNumberBaseValues.values["2"].padStart(operationsData.maxBits, "0")}<sub>(2)</sub> × {operationsData.secondNumberBaseValues.values["2"].padStart(operationsData.maxBits, "0")}<sub>(2)</sub> ({operationsData.firstNumberBaseValues.values["10"]} × {operationsData.secondNumberBaseValues.values["10"]})</p>
+            </div>
             <table class="operationsTable">
               <thead>
                 <tr>
@@ -76,12 +104,6 @@ export default function MultiplicationTable() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Inicial</td>
-                  <td>{"".padStart(operationsData.maxBits, "0")}</td>
-                  <td>{operationsData.secondNumberBaseValues.values["2"].padStart(operationsData.maxBits, "0")}</td>
-                  <td>P<sub>LO</sub> ← Multiplicador</td>
-                </tr>
                 {generateMultiplicationTable()}
               </tbody>
             </table>

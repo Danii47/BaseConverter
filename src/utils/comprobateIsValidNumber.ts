@@ -5,7 +5,7 @@ export function comprobateValidNumber(number: string, base: string): boolean {
   const validNumbers: { [key: string]: RegExp } = {
     "2": /^-?[01]+$/,
     "8": /^-?[0-7]+$/,
-    "10": /^-?[0-9]+$/,
+    "10": /^-?[0-9]+([.,][0-9]+)?$/, // Allow decimal numbers with . or ,
     "16": /^-?[0-9A-Fa-f]+$/
   }
 

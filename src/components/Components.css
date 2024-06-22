@@ -1,5 +1,3 @@
-
-
 .conversorInput {
   width: 100%;
   max-width: 200px;
@@ -142,7 +140,7 @@
 
 .canClickResult span {
   transition: color .18s;
-  
+
 }
 
 .canClickResult:hover {
@@ -218,47 +216,91 @@
   scale: 1.1;
 }
 
-.operationsTable {
+.operationsTableContainer {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
   border-radius: 8px;
   border: 1px solid #333;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  background-color: light-dark(#ffffff, #181a22);
+  padding: 0;
+  max-height: 60vh;
+  /* Ajusta este valor según tus necesidades */
+  overflow-y: auto;
+  /* Muestra barras de desplazamiento si es necesario */
+}
+
+.operationsTable {
+  width: 100%;
+  border-collapse: collapse;
+  /* Para eliminar cualquier espacio extra entre celdas */
   text-align: center;
   padding: .25rem;
-  overflow: hidden;
+  margin: 0;
   border-spacing: 0;
 }
 
+@media (max-width: 600px) {
+  .operationsTable {
+    font-size: .6rem;
+  }
+
+  .operationsTableContainer {
+    padding: .0;
+  }
+
+  .operationsTable th,
+  .operationsTable td {
+    padding: .2rem;
+
+  }
+}
+
 .operationsTable th {
+  position: sticky;
+  top: 0;
+  background-color: #0e0f14f5;
+  z-index: 2;
   padding: .5rem;
   border-bottom: 1px solid #333;
   border-right: 1px solid #333;
 }
+
 
 .operationsTable td {
   padding: .5rem;
   border-bottom: 1px solid #333;
   border-right: 1px solid #333;
-
 }
 
 .operationsTable tr:last-child td {
   border-bottom: none;
 }
 
-.operationsTable td:last-child, .operationsTable th:last-child {
+.operationsTable td:last-child,
+.operationsTable th:last-child {
   border-right: none;
 }
 
-.operationsTable .tableResult {
-  border: 2px solid black;
+.operationsTable tbody tr:last-child {
+  background-color: rgba(0, 129, 0, 0.1);
+
 }
 
 .operationToShow {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   margin: 1rem 0;
+  gap: .0rem;
+}
+
+.operationText {
+  font-size: 1rem;
+  margin: .5rem 0;
+  background-color: #0e0f14f5;
+  padding: .5rem;
+  border-radius: 10px;
+  border: 1px solid #08080cf5;
 }

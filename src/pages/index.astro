@@ -1,7 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro"
 import ButtonsContainer from "../components/ButtonsContainer"
-
 ---
 
 <Layout
@@ -9,7 +8,7 @@ import ButtonsContainer from "../components/ButtonsContainer"
 	pageTitle="Conversor de bases"
 >
 	<main>
-		<ButtonsContainer client:visible />
+		<ButtonsContainer client:only />
 	</main>
 </Layout>
 

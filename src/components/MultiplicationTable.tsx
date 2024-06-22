@@ -1,26 +1,9 @@
 import { useEffect, useState, type Dispatch, type StateUpdater } from "preact/hooks"
 
-import "./Components.css"
+import { type OperationsData } from "../types/conversorTypes"
 
-type OperationsData = {
-  options: {
-    magnitudSign: boolean
-    ca2: boolean
-  }
-  firstNumberBaseValues: {
-    bits: number
-    values: {
-      [key: string]: any
-    }
-  }
-  secondNumberBaseValues: {
-    bits: number
-    values: {
-      [key: string]: any
-    }
-  },
-  maxBits: number
-}
+import "./Components.css"
+import { twoComplementValue } from "../utils/twoComplement"
 
 export default function MultiplicationTable() {
 
@@ -37,14 +20,30 @@ export default function MultiplicationTable() {
 
   const generateMultiplicationTable = () => {
 
-    let Phi: string = "".padStart(operationsData.maxBits, "0")
-    let Plo: string = operationsData.secondNumberBaseValues.values["2"].padStart(operationsData.maxBits, "0")
+    let firstNumber = operationsData.firstNumberBaseValues.values["2"]
+    let secondNumber = operationsData.secondNumberBaseValues.values["2"]
+
+    if (operationsData.options.ca2 && firstNumber[0] === "1") {
+      firstNumber = twoComplementValue(firstNumber)
+    } else if (operationsData.options.magnitudSign && firstNumber[0] === "1") {
+      firstNumber = firstNumber.substring(1)
+    }
+
+    if (operationsData.options.ca2 && secondNumber[0] === "1") {
+      secondNumber = twoComplementValue(secondNumber)
+    } else if (operationsData.options.magnitudSign && secondNumber[0] === "1") {
+      secondNumber = secondNumber.substring(1)
+    }
+
+    let Phi = "".padStart(operationsData.maxBits, "0")
+    let Plo = secondNumber.padStart(operationsData.maxBits, "0")
+    
 
     const table = [
       <tr>
         <td>Inicial</td>
         <td>{"".padStart(operationsData.maxBits, "0")}</td>
-        <td>{operationsData.secondNumberBaseValues.values["2"].padStart(operationsData.maxBits, "0")}</td>
+        <td>{secondNumber.padStart(operationsData.maxBits, "0")}</td>
         <td>P<sub>LO</sub> ← Multiplicador</td>
       </tr>
     ]
@@ -53,7 +52,7 @@ export default function MultiplicationTable() {
       let P0 = Plo.slice(-1)
 
       if (P0 === "1") {
-        Phi = (parseInt(Phi, 2) + parseInt(operationsData.firstNumberBaseValues.values["2"], 2)).toString(2).padStart(operationsData.maxBits, "0")
+        Phi = (parseInt(Phi, 2) + parseInt(firstNumber, 2)).toString(2).padStart(operationsData.maxBits, "0")
         table.push(
 
           <tr>
@@ -71,7 +70,7 @@ export default function MultiplicationTable() {
 
       table.push(
         <tr class={i === operationsData.maxBits - 1 ? "tableResult" : ""}>
-          <td>{i + 1}</td>
+          <td>{i === operationsData.maxBits - 1 ? "Resultado" : i + 1}</td>
           <td>{Phi}</td>
           <td>{Plo}</td>
           <td>P &gt;&gt; 1</td>
@@ -92,21 +91,36 @@ export default function MultiplicationTable() {
           <div class="operations">
 
             <div class="operationToShow">
-              <p>{operationsData.firstNumberBaseValues.values["2"].padStart(operationsData.maxBits, "0")}<sub>(2)</sub> × {operationsData.secondNumberBaseValues.values["2"].padStart(operationsData.maxBits, "0")}<sub>(2)</sub> ({operationsData.firstNumberBaseValues.values["10"]} × {operationsData.secondNumberBaseValues.values["10"]})</p>
+              <p class="operationText">{operationsData.firstNumberBaseValues.values["2"]}<sub>(2)</sub> × {operationsData.secondNumberBaseValues.values["2"]}<sub>(2)</sub> ({operationsData.firstNumberBaseValues.values["10"]}<sub>(10)</sub> × {operationsData.secondNumberBaseValues.values["10"]}<sub>(10)</sub>)</p>
+              <br />
+              {
+                operationsData.options.ca2 &&
+                (
+                  <>
+                    <p>Multiplicación de los valores absolutos</p>
+                    <p class="operationText"> {operationsData.firstNumberBaseValues.values["2"][0] === "1" ? twoComplementValue(operationsData.firstNumberBaseValues.values["2"]) : operationsData.firstNumberBaseValues.values["2"]}<sub>(2)</sub> × {operationsData.secondNumberBaseValues.values["2"][0] === "1" ? twoComplementValue(operationsData.secondNumberBaseValues.values["2"]) : operationsData.secondNumberBaseValues.values["2"]}<sub>(2)</sub> ({operationsData.firstNumberBaseValues.values["10"][0] === "-" ? operationsData.firstNumberBaseValues.values["10"].substring(1) : operationsData.firstNumberBaseValues.values["10"]}<sub>(10)</sub> × {operationsData.secondNumberBaseValues.values["10"][0] === "-" ? operationsData.secondNumberBaseValues.values["10"].substring(1) : operationsData.secondNumberBaseValues.values["10"]}<sub>(10)</sub>)</p>
+                  </>
+
+                )
+              }
             </div>
-            <table class="operationsTable">
-              <thead>
-                <tr>
-                  <th>Iteración</th>
-                  <th>P<sub>HI</sub></th>
-                  <th>P<sub>LO</sub></th>
-                  <th>Comentarios</th>
-                </tr>
-              </thead>
-              <tbody>
-                {generateMultiplicationTable()}
-              </tbody>
-            </table>
+            <div class="operationsTableContainer">
+
+
+              <table class="operationsTable">
+                <thead>
+                  <tr>
+                    <th>Iteración</th>
+                    <th>P<sub>HI</sub></th>
+                    <th>P<sub>LO</sub></th>
+                    <th>Comentarios</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {generateMultiplicationTable()}
+                </tbody>
+              </table>
+            </div>
 
           </div>
       }

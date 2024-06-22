@@ -25,3 +25,23 @@ export type Operations = {
 }
 
 export type Operation = "+" | "-" | "×" | "÷"
+
+export type OperationsData = {
+  options: {
+    magnitudSign: boolean
+    ca2: boolean
+  }
+  firstNumberBaseValues: {
+    bits: number
+    values: {
+      [key: string]: any
+    }
+  }
+  secondNumberBaseValues: {
+    bits: number
+    values: {
+      [key: string]: any
+    }
+  },
+  maxBits: number
+}

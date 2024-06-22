@@ -1,6 +1,6 @@
 import { useState, type Dispatch, type StateUpdater } from "preact/hooks"
 import ButtonsOptions from "./ButtonsOptions"
-import type { Bases, Operation } from "../types/conversorTypes"
+import type { Operation } from "../types/conversorTypes"
 
 import "./Components.css"
 import NumberInput from "./NumberInput"
@@ -9,29 +9,54 @@ import OperationButtons from "./OperationButtons"
 
 export default function ButtonsContainer() {
 
-  const [firstNumberBaseValues, setFirstNumberBaseValues] = useState({
-    bits: 0,
-    values: {
-      2: "",
-      8: "",
-      10: "",
-      16: "",
+  const [firstNumberBaseValues, setFirstNumberBaseValues] = useState(() => {
+    
+    const storageData = localStorage.getItem('operationsData')
+
+    if (storageData) {
+      return JSON.parse(storageData).firstNumberBaseValues
+    } else {
+      return {
+        bits: 0,
+        values: {
+          2: "0",
+          8: "0",
+          10: "0",
+          16: "0",
+        }
+      }
     }
   })
 
-  const [secondNumberBaseValues, setSecondNumberBaseValues] = useState({
-    bits: 0,
-    values: {
-      2: "",
-      8: "",
-      10: "",
-      16: "",
+  const [secondNumberBaseValues, setSecondNumberBaseValues] = useState(() => {
+    const storageData = localStorage.getItem('operationsData')
+
+    if (storageData) {
+      return JSON.parse(storageData).secondNumberBaseValues
+    } else {
+      return {
+        bits: 0,
+        values: {
+          2: "0",
+          8: "0",
+          10: "0",
+          16: "0",
+        }
+      }
     }
   })
 
-  const [options, setOptions] = useState({
-    ca2: false,
-    magnitudSign: false,
+  const [options, setOptions] = useState(() => {
+    const storageData = localStorage.getItem('operationsData')
+
+    if (storageData) {
+      return JSON.parse(storageData).options
+    } else {
+      return {
+        ca2: false,
+        magnitudSign: false,
+      }
+    }
   })
 
   const [operation, setOperation] = useState("+") as [Operation, Dispatch<StateUpdater<Operation>> ];

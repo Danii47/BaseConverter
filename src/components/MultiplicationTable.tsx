@@ -37,7 +37,7 @@ export default function MultiplicationTable() {
 
     let Phi = "".padStart(operationsData.maxBits, "0")
     let Plo = secondNumber.padStart(operationsData.maxBits, "0")
-    
+
 
     const table = [
       <tr>
@@ -83,22 +83,44 @@ export default function MultiplicationTable() {
     return table
   }
 
+  const operationResult = () => {
+    const multiplicationResult = (parseInt(operationsData.firstNumberBaseValues.values["10"]) * parseInt(operationsData.secondNumberBaseValues.values["10"])).toString(2)
+
+    if (operationsData.options.ca2) {
+      return multiplicationResult[0] === "-" ? twoComplementValue("0" + multiplicationResult.substring(1)) : "0" + multiplicationResult
+    } else if (operationsData.options.magnitudSign) {
+      return multiplicationResult[0] === "-" ? "1" + multiplicationResult.substring(1) : "0" + multiplicationResult
+    }
+
+    return multiplicationResult
+  }
+
   return (
-    <>
+    <div class="operations">
       {
         !operationsData ?
-          <div>No hay datos de operaciones</div> :
-          <div class="operations">
+          "No hay datos de operaciones" :
 
+          <>
             <div class="operationToShow">
-              <p class="operationText">{operationsData.firstNumberBaseValues.values["2"]}<sub>(2)</sub> × {operationsData.secondNumberBaseValues.values["2"]}<sub>(2)</sub> ({operationsData.firstNumberBaseValues.values["10"]}<sub>(10)</sub> × {operationsData.secondNumberBaseValues.values["10"]}<sub>(10)</sub>)</p>
+              <p class="operationText">{operationsData.firstNumberBaseValues.values["2"]}<sub>(2)</sub> × {operationsData.secondNumberBaseValues.values["2"]}<sub>(2)</sub> ({operationsData.firstNumberBaseValues.values["10"]}<sub>(10)</sub> × {operationsData.secondNumberBaseValues.values["10"]}<sub>(10)</sub>) = {operationResult()}</p>
               <br />
               {
                 operationsData.options.ca2 &&
                 (
                   <>
-                    <p>Multiplicación de los valores absolutos</p>
-                    <p class="operationText"> {operationsData.firstNumberBaseValues.values["2"][0] === "1" ? twoComplementValue(operationsData.firstNumberBaseValues.values["2"]) : operationsData.firstNumberBaseValues.values["2"]}<sub>(2)</sub> × {operationsData.secondNumberBaseValues.values["2"][0] === "1" ? twoComplementValue(operationsData.secondNumberBaseValues.values["2"]) : operationsData.secondNumberBaseValues.values["2"]}<sub>(2)</sub> ({operationsData.firstNumberBaseValues.values["10"][0] === "-" ? operationsData.firstNumberBaseValues.values["10"].substring(1) : operationsData.firstNumberBaseValues.values["10"]}<sub>(10)</sub> × {operationsData.secondNumberBaseValues.values["10"][0] === "-" ? operationsData.secondNumberBaseValues.values["10"].substring(1) : operationsData.secondNumberBaseValues.values["10"]}<sub>(10)</sub>)</p>
+                    <p>Multiplicación de los valores absolutos (Complemento a 2)</p>
+                    <p class="operationText"> {operationsData.firstNumberBaseValues.values["2"][0] === "1" ? twoComplementValue(operationsData.firstNumberBaseValues.values["2"]).padStart(operationsData.maxBits, "0") : operationsData.firstNumberBaseValues.values["2"].padStart(operationsData.maxBits, "0")}<sub>(2)</sub> × {operationsData.secondNumberBaseValues.values["2"][0] === "1" ? twoComplementValue(operationsData.secondNumberBaseValues.values["2"]).padStart(operationsData.maxBits, "0") : operationsData.secondNumberBaseValues.values["2"].padStart(operationsData.maxBits, "0")}<sub>(2)</sub> ({operationsData.firstNumberBaseValues.values["10"][0] === "-" ? operationsData.firstNumberBaseValues.values["10"].substring(1) : operationsData.firstNumberBaseValues.values["10"]}<sub>(10)</sub> × {operationsData.secondNumberBaseValues.values["10"][0] === "-" ? operationsData.secondNumberBaseValues.values["10"].substring(1) : operationsData.secondNumberBaseValues.values["10"]}<sub>(10)</sub>)</p>
+                  </>
+
+                )
+              }
+              {
+                operationsData.options.magnitudSign &&
+                (
+                  <>
+                    <p>Multiplicación de los valores absolutos (Signo magnitud)</p>
+                    <p class="operationText"> {operationsData.firstNumberBaseValues.values["2"][0] === "1" ? operationsData.firstNumberBaseValues.values["2"].substring(1).padStart(operationsData.maxBits, "0") : operationsData.firstNumberBaseValues.values["2"].substring(1).padStart(operationsData.maxBits, "0")}<sub>(2)</sub> × {operationsData.secondNumberBaseValues.values["2"][0] === "1" ? twoComplementValue(operationsData.secondNumberBaseValues.values["2"]).padStart(operationsData.maxBits, "0") : operationsData.secondNumberBaseValues.values["2"].padStart(operationsData.maxBits, "0")}<sub>(2)</sub> ({operationsData.firstNumberBaseValues.values["10"][0] === "-" ? operationsData.firstNumberBaseValues.values["10"].substring(1) : operationsData.firstNumberBaseValues.values["10"]}<sub>(10)</sub> × {operationsData.secondNumberBaseValues.values["10"][0] === "-" ? operationsData.secondNumberBaseValues.values["10"].substring(1) : operationsData.secondNumberBaseValues.values["10"]}<sub>(10)</sub>)</p>
                   </>
 
                 )
@@ -121,9 +143,9 @@ export default function MultiplicationTable() {
                 </tbody>
               </table>
             </div>
+          </>
 
-          </div>
       }
-    </>
+    </div>
   )
 }

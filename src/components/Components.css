@@ -304,3 +304,9 @@
   border-radius: 10px;
   border: 1px solid #08080cf5;
 }
+
+.operations {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

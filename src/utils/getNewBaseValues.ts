@@ -8,6 +8,7 @@ export function getNewBaseValue(
   options: OptionsType
 ): Array<[Base, string]> {
   
+
   return baseValuesEntries.map(([base]) => {
 
     if (base === changingBase) {
